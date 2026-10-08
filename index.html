@@ -1,0 +1,3500 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>B.Tech AIML Core OS | Engineering Notes & Developer Hub</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    boxShadow: {
+                        neon: '0 0 25px rgba(59, 130, 246, 0.4)',
+                        'neon-cyan': '0 0 25px rgba(6, 182, 212, 0.4)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        /* ===============================
+           COMMON
+        =============================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            transition:
+                background-color .3s ease,
+                color .3s ease;
+        }
+
+        .cyber-grid {
+            background-image:
+                linear-gradient(to right,
+                    rgba(59, 130, 246, 0.05) 1px,
+                    transparent 1px),
+                linear-gradient(to bottom,
+                    rgba(59, 130, 246, 0.05) 1px,
+                    transparent 1px);
+
+            background-size: 32px 32px;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(59, 130, 246, .6);
+        }
+
+        /* ===============================
+           LIGHT MODE
+        =============================== */
+
+        html.light body {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+
+            background-image:
+                linear-gradient(to right,
+                    rgba(37, 99, 235, .045) 1px,
+                    transparent 1px),
+                linear-gradient(to bottom,
+                    rgba(37, 99, 235, .045) 1px,
+                    transparent 1px);
+
+            background-size: 32px 32px;
+        }
+
+        html.light header {
+            background-color: rgba(255,255,255,.94) !important;
+            border-color: rgba(37,99,235,.18) !important;
+        }
+
+        html.light footer {
+            background-color: #ffffff !important;
+            border-color: rgba(37,99,235,.18) !important;
+        }
+
+        html.light .bg-slate-950 {
+            background-color: #f8fafc !important;
+        }
+
+        html.light .bg-slate-950\/80 {
+            background-color: rgba(248,250,252,.92) !important;
+        }
+
+        html.light .bg-slate-950\/90 {
+            background-color: rgba(248,250,252,.94) !important;
+        }
+
+        html.light .bg-slate-950\/70 {
+            background-color: rgba(241,245,249,.9) !important;
+        }
+
+        html.light .bg-slate-900 {
+            background-color: #ffffff !important;
+        }
+
+        html.light .bg-slate-900\/90 {
+            background-color: rgba(255,255,255,.94) !important;
+        }
+
+        html.light .bg-slate-900\/60 {
+            background-color: rgba(255,255,255,.88) !important;
+        }
+
+        html.light .bg-slate-900\/40 {
+            background-color: rgba(255,255,255,.72) !important;
+        }
+
+        html.light .bg-slate-800 {
+            background-color: #e2e8f0 !important;
+        }
+
+        html.light .bg-slate-800\/40 {
+            background-color: rgba(226,232,240,.55) !important;
+        }
+
+        html.light .text-slate-100 {
+            color: #0f172a !important;
+        }
+
+        html.light .text-slate-200 {
+            color: #1e293b !important;
+        }
+
+        html.light .text-slate-300 {
+            color: #334155 !important;
+        }
+
+        html.light .text-slate-400 {
+            color: #475569 !important;
+        }
+
+        html.light .text-slate-500 {
+            color: #64748b !important;
+        }
+
+        html.light .text-slate-600 {
+            color: #475569 !important;
+        }
+
+        html.light .border-slate-800 {
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light .border-slate-800\/80 {
+            border-color: rgba(203,213,225,.8) !important;
+        }
+
+        html.light .border-slate-700 {
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light input,
+        html.light textarea,
+        html.light select {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light input::placeholder,
+        html.light textarea::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        html.light .cyber-grid {
+            background-image:
+                linear-gradient(to right,
+                    rgba(37,99,235,.045) 1px,
+                    transparent 1px),
+                linear-gradient(to bottom,
+                    rgba(37,99,235,.045) 1px,
+                    transparent 1px);
+        }
+
+        html.light .sticky {
+            background-color: rgba(255,255,255,.94) !important;
+        }
+
+        /* Theme button */
+
+        #themeToggleBtn {
+            transition: all .3s ease;
+        }
+
+        #themeToggleBtn:hover {
+            transform: rotate(15deg) scale(1.05);
+        }
+
+        /* Smooth */
+
+        header,
+        footer,
+        .item-card,
+        input,
+        textarea,
+        select,
+        button,
+        .modal-box {
+            transition:
+                background-color .3s ease,
+                color .3s ease,
+                border-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .modal-backdrop {
+            background: rgba(2,6,23,.80) !important;
+        }
+
+        html.light .modal-backdrop {
+            background: rgba(15,23,42,.42) !important;
+        }
+
+        /* Scrollbar */
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0891b2;
+            border-radius: 20px;
+        }
+
+        html.light ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+
+        html.light ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+        }
+
+
+        /* =========================================================
+           DEVELOPER HUB PRO UI
+        ========================================================= */
+
+        :root {
+            --dev-cyan: #22d3ee;
+            --dev-blue: #3b82f6;
+            --dev-purple: #8b5cf6;
+            --dev-green: #10b981;
+        }
+
+        .dev-shell {
+            position: relative;
+            overflow: visible;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .dev-shell::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(34,211,238,.10), transparent 28%),
+                radial-gradient(circle at 85% 10%, rgba(59,130,246,.10), transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(139,92,246,.08), transparent 28%);
+        }
+
+        .dev-terminal {
+            position: relative;
+            background: rgba(2, 6, 23, .86);
+            border: 1px solid rgba(34, 211, 238, .28);
+            box-shadow: 0 0 45px rgba(6,182,212,.10), inset 0 0 35px rgba(59,130,246,.035);
+            backdrop-filter: blur(18px);
+        }
+
+        html.light .dev-terminal {
+            background: rgba(255,255,255,.92) !important;
+            border-color: rgba(37,99,235,.18) !important;
+            box-shadow: 0 15px 45px rgba(15,23,42,.08);
+        }
+
+        .terminal-bar {
+            border-bottom: 1px solid rgba(148,163,184,.14);
+        }
+
+        .terminal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .scanline {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(34,211,238,.45), transparent);
+            animation: scan 5s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: .7; }
+            90% { opacity: .7; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .dev-stat {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(15,23,42,.82), rgba(2,6,23,.92));
+            border: 1px solid rgba(71,85,105,.45);
+            transition: .25s ease;
+        }
+
+        .dev-stat:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34,211,238,.45);
+            box-shadow: 0 15px 35px rgba(0,0,0,.20), 0 0 25px rgba(34,211,238,.07);
+        }
+
+        html.light .dev-stat {
+            background: rgba(255,255,255,.92) !important;
+            border-color: #dbe4ef !important;
+            box-shadow: 0 10px 30px rgba(15,23,42,.05);
+        }
+
+        .dev-stat::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            right: -30px;
+            top: -30px;
+            border-radius: 50%;
+            background: rgba(34,211,238,.08);
+        }
+
+        .dev-command {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(34,211,238,.20);
+            background: rgba(15,23,42,.65);
+            color: #94a3b8;
+            font: 500 11px/1 "Fira Code", monospace;
+        }
+
+        html.light .dev-command {
+            background: #fff !important;
+            color: #475569 !important;
+            border-color: #dbe4ef !important;
+        }
+
+        .dev-command b { color: #22d3ee; }
+
+        .dev-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(34,211,238,.20);
+            background: rgba(34,211,238,.06);
+            color: #67e8f9;
+            font: 700 10px/1 "Fira Code", monospace;
+            letter-spacing: .08em;
+        }
+
+        html.light .dev-badge {
+            background: rgba(37,99,235,.06) !important;
+            border-color: rgba(37,99,235,.15) !important;
+            color: #2563eb !important;
+        }
+
+        .dev-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font: 800 11px/1 "Fira Code", monospace;
+            color: #94a3b8;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        .dev-section-title::before {
+            content: "";
+            width: 24px;
+            height: 2px;
+            background: linear-gradient(90deg, #22d3ee, transparent);
+        }
+
+        .item-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+            transition: .55s ease;
+        }
+
+        .item-card:hover::before { left: 130%; }
+
+        .dev-cursor {
+            display: inline-block;
+            width: 7px;
+            height: 16px;
+            background: #22d3ee;
+            margin-left: 4px;
+            vertical-align: -3px;
+            animation: blink .8s steps(2) infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .dev-float {
+            animation: devFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes devFloat {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .status-pulse {
+            animation: statusPulse 1.7s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(34,211,238,.25); }
+            50% { box-shadow: 0 0 0 7px rgba(34,211,238,0); }
+        }
+
+        html.light .dev-shell::before {
+            opacity: .55;
+        }
+
+    </style>
+
+    <!-- Prevent theme flash -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem("btech_theme") || "dark";
+
+            if (theme === "light") {
+                document.documentElement.classList.remove("dark");
+                document.documentElement.classList.add("light");
+            } else {
+                document.documentElement.classList.add("dark");
+                document.documentElement.classList.remove("light");
+            }
+        })();
+    </script>
+
+</head>
+
+
+<body
+    class="bg-slate-950 text-slate-100 font-sans antialiased cyber-grid min-h-screen flex flex-col justify-between dev-shell">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header
+    class="border-b border-blue-500/20 bg-slate-950/90 backdrop-blur-xl sticky top-0 z-50">
+
+    <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3">
+
+        <!-- Logo -->
+
+        <div class="flex items-center space-x-3">
+
+            <div
+                class="bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 text-white p-2.5 rounded-xl shadow-neon border border-cyan-400/40">
+
+                <i class="fa-solid fa-microchip text-lg animate-pulse"></i>
+
+            </div>
+
+            <div>
+
+                <span
+                    class="text-lg font-black tracking-wider bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent">
+
+                    B.TECH<span class="text-cyan-400">.AIML</span>
+
+                </span>
+
+                <span
+                    class="block text-[10px] text-cyan-400/80 font-mono tracking-widest uppercase font-bold">
+
+                    NEURAL CLOUD // DEV NODE
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Server Status -->
+
+        <div
+            class="hidden md:flex items-center space-x-2 bg-slate-900/80 border border-blue-500/30 px-3.5 py-1.5 rounded-full text-xs font-mono text-slate-300">
+
+            <span
+                class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee] animate-ping status-pulse">
+            </span>
+
+            <span id="authStatusText">
+
+                SYS_MODE:
+                <strong class="text-cyan-400">
+                    STUDENT_LOCKED
+                </strong>
+
+            </span>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div class="flex items-center space-x-2">
+
+
+            <!-- THEME BUTTON -->
+
+            <button
+                onclick="toggleTheme()"
+                id="themeToggleBtn"
+                class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-400 flex items-center justify-center shadow-lg"
+                title="Switch to Light Mode">
+
+                <i
+                    id="themeIcon"
+                    class="fa-solid fa-sun text-yellow-400">
+                </i>
+
+            </button>
+
+
+            <!-- LOGIN -->
+
+            <button
+                onclick="toggleAdminSession()"
+                id="adminToggleBtn"
+                class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-neon transition flex items-center space-x-2 border border-cyan-400/40 font-mono tracking-wider">
+
+                <i
+                    class="fa-solid fa-fingerprint"
+                    id="adminBtnIcon">
+                </i>
+
+                <span id="adminBtnText">
+                    AUTH ACCESS
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+
+    <div class="absolute inset-0 bg-gradient-to-b from-blue-600/10 via-cyan-500/5 to-transparent pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+
+        <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-center">
+
+            <div>
+                <div class="dev-badge mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 status-pulse"></span>
+                    AI / ML ENGINEERING WORKSPACE
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-5 leading-[1.02]">
+                    Build.
+                    <span class="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent glow-text">
+                        Learn.
+                    </span>
+                    <br>
+                    <span class="text-slate-100">Deploy.</span>
+                </h1>
+
+                <p class="text-slate-400 text-sm sm:text-base max-w-2xl mb-7 leading-relaxed">
+                    A developer-first B.Tech AIML command center for notes, engineering tools,
+                    PYQs, assignments and cloud-synced resources.
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-7">
+                    <div class="dev-command"><b>~/aiml</b> <span>$</span> open neural-hub</div>
+                    <div class="dev-command"><i class="fa-solid fa-bolt text-amber-400"></i> REALTIME</div>
+                    <div class="dev-command"><i class="fa-solid fa-shield-halved text-emerald-400"></i> SECURE NODE</div>
+                </div>
+
+                <div class="flex flex-wrap gap-3 text-xs font-mono">
+                    <button onclick="openModal('passwordModal')"
+                        class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-5 py-3 rounded-xl font-bold shadow-neon border border-cyan-400/30 transition">
+                        <i class="fa-solid fa-terminal mr-2"></i>ENTER WORKSPACE
+                    </button>
+
+                    <button onclick="document.getElementById('contentGrid').scrollIntoView({behavior:'smooth'})"
+                        class="bg-slate-900/70 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400/40 text-slate-200 px-5 py-3 rounded-xl transition">
+                        <i class="fa-solid fa-code-branch mr-2 text-cyan-400"></i>EXPLORE REPOSITORY
+                    </button>
+                </div>
+            </div>
+
+            <div class="dev-terminal rounded-2xl p-0 overflow-hidden dev-float">
+                <div class="scanline"></div>
+
+                <div class="terminal-bar px-4 py-3 flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                        <span class="terminal-dot bg-red-400"></span>
+                        <span class="terminal-dot bg-yellow-400"></span>
+                        <span class="terminal-dot bg-emerald-400"></span>
+                    </div>
+                    <span class="text-[10px] text-slate-500 font-mono">guru@aiml-core:~</span>
+                    <span class="text-[10px] text-emerald-400 font-mono">ONLINE</span>
+                </div>
+
+                <div class="p-5 font-mono text-xs sm:text-sm space-y-3">
+                    <div><span class="text-emerald-400">guru@aiml</span><span class="text-slate-500">:</span><span class="text-blue-400">~/core</span><span class="text-slate-300">$</span> <span class="text-slate-100">systemctl status neural-cloud</span></div>
+                    <div class="pl-4 text-emerald-400">● neural-cloud.service - ACTIVE (RUNNING)</div>
+                    <div class="pl-4 text-slate-500">Loaded: cloud-registry.service</div>
+                    <div class="pl-4 text-slate-500">Sync: <span class="text-cyan-400">REALTIME FIRESTORE</span></div>
+                    <div class="pl-4 text-slate-500">Architecture: <span class="text-purple-400">AIML / WEB / CLOUD</span></div>
+                    <div class="mt-4"><span class="text-emerald-400">guru@aiml</span><span class="text-slate-500">:</span><span class="text-blue-400">~/core</span><span class="text-slate-300">$</span> <span id="terminalTyping">initializing developer workspace...</span><span class="dev-cursor"></span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Developer stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-10">
+
+            <div class="dev-stat rounded-2xl p-4">
+                <div class="text-cyan-400 text-lg mb-2"><i class="fa-solid fa-book-open"></i></div>
+                <div id="statNotes" class="text-2xl font-black text-slate-100">00</div>
+                <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Notes Modules</div>
+            </div>
+
+            <div class="dev-stat rounded-2xl p-4">
+                <div class="text-emerald-400 text-lg mb-2"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <div id="statTools" class="text-2xl font-black text-slate-100">00</div>
+                <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Dev Tools</div>
+            </div>
+
+            <div class="dev-stat rounded-2xl p-4">
+                <div class="text-purple-400 text-lg mb-2"><i class="fa-solid fa-file-code"></i></div>
+                <div id="statPapers" class="text-2xl font-black text-slate-100">00</div>
+                <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">PYQ / Papers</div>
+            </div>
+
+            <div class="dev-stat rounded-2xl p-4">
+                <div class="text-amber-400 text-lg mb-2"><i class="fa-solid fa-cloud"></i></div>
+                <div id="statUsers" class="text-2xl font-black text-slate-100">00</div>
+                <div class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Cloud Nodes</div>
+            </div>
+
+        </div>
+
+        <div class="mt-8">
+            <div class="dev-section-title mb-3">Repository Search</div>
+
+            <div class="bg-slate-900/90 border border-cyan-500/30 p-2.5 rounded-2xl shadow-neon-cyan flex items-center max-w-4xl">
+
+                <div class="pl-3 text-cyan-400 font-mono text-sm">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
+
+                <input type="text" id="searchInput"
+                    placeholder="grep modules by title, branch, type or keyword..."
+                    class="w-full bg-transparent px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none text-sm font-mono">
+
+                <button onclick="clearSearch()"
+                    class="text-slate-400 hover:text-white px-3 text-xs font-mono bg-slate-800 py-2 rounded-xl">
+                    CLEAR
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+        <div class="dev-section-title">
+            Cloud Repository
+        </div>
+        <div class="text-[10px] font-mono text-slate-500">
+            branch: <span class="text-cyan-400">main</span>
+            &nbsp;•&nbsp;
+            env: <span class="text-emerald-400">production</span>
+        </div>
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div
+        class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-900">
+
+        <div
+            class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2">
+
+            <button
+                onclick="filterCategory('all')"
+                id="btn-all"
+                class="cat-btn bg-cyan-600 text-white px-3.5 py-2 rounded-xl text-xs font-mono uppercase tracking-wider font-bold">
+
+                All Modules
+
+            </button>
+
+            <button
+                onclick="filterCategory('notes')"
+                id="btn-notes"
+                class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-3.5 py-2 rounded-xl text-xs font-mono">
+
+                Notes
+
+            </button>
+
+            <button
+                onclick="filterCategory('tool')"
+                id="btn-tool"
+                class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-3.5 py-2 rounded-xl text-xs font-mono">
+
+                Tools
+
+            </button>
+
+            <button
+                onclick="filterCategory('pyq')"
+                id="btn-pyq"
+                class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-3.5 py-2 rounded-xl text-xs font-mono">
+
+                PYQ / Papers
+
+            </button>
+
+            <button
+                onclick="filterCategory('syllabus')"
+                id="btn-syllabus"
+                class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-3.5 py-2 rounded-xl text-xs font-mono">
+
+                Syllabus
+
+            </button>
+
+            <button
+                onclick="filterCategory('assignment')"
+                id="btn-assignment"
+                class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-3.5 py-2 rounded-xl text-xs font-mono">
+
+                Assignments
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
+
+            DB_STATE:
+
+            <strong
+                id="dbStatus"
+                class="text-amber-400">
+
+                CONNECTING...
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div
+        id="contentGrid"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer
+    class="border-t border-blue-500/20 bg-slate-950 py-8 px-4 text-center font-mono text-xs">
+
+    <div
+        class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+
+        <div class="text-slate-500">
+
+            © 2026 B.Tech AIML Cloud Platform.
+
+        </div>
+
+
+        <div
+            class="inline-flex items-center space-x-3 bg-slate-900 border border-cyan-500/40 px-4 py-2 rounded-2xl">
+
+            <div
+                class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black">
+
+                GR
+
+            </div>
+
+            <div class="text-left">
+
+                <span
+                    class="block text-[11px] font-bold text-cyan-300 tracking-wider">
+
+                    DEVELOPED BY GURU RAMDAYAL
+
+                </span>
+
+                <span
+                    class="block text-[9px] text-slate-400">
+
+                    B.Tech AIML Engineer • Cloud Architect
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-5">
+    <div class="dev-command justify-center sm:justify-between flex-wrap">
+        <span><b>GURU@AIML</b> // developer hub</span>
+        <span class="text-slate-500">Built with HTML • Tailwind • Firebase • JavaScript</span>
+        <span class="text-emerald-400"><i class="fa-solid fa-circle text-[6px] mr-1"></i> all systems operational</span>
+    </div>
+</div>
+
+
+<!-- =====================================================
+     ADMIN PANEL
+===================================================== -->
+
+<div
+    id="adminPanelSection"
+    class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-8">
+
+
+    <!-- UPLOAD -->
+
+    <div
+        class="bg-slate-900 border border-cyan-500/40 rounded-2xl p-6 shadow-neon-cyan">
+
+        <div
+            class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+
+            <div class="flex items-center space-x-3">
+
+                <div
+                    class="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 p-2.5 rounded-xl">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                </div>
+
+                <div>
+
+                    <h3
+                        class="text-base font-bold text-slate-100 font-mono">
+
+                        FIRESTORE NEURAL REGISTRY
+
+                    </h3>
+
+                    <p class="text-xs text-slate-400">
+
+                        Deploy resources, web tools or documentation instantly.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button
+                onclick="logoutSession()"
+                class="bg-red-500/10 text-red-400 border border-red-500/30 text-xs font-mono px-3.5 py-1.5 rounded-xl">
+
+                TERMINATE SESSION
+
+            </button>
+
+        </div>
+
+
+        <form
+            id="uploadForm"
+            class="space-y-4 font-mono text-xs">
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div>
+
+                    <label class="block text-slate-400 uppercase mb-1">
+                        Module Category
+                    </label>
+
+                    <select
+                        id="uploadType"
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200">
+
+                        <option value="notes">
+                            Lecture Notes
+                        </option>
+
+                        <option value="tool">
+                            Engineering Web Tool
+                        </option>
+
+                        <option value="pyq">
+                            Question Papers / PYQ
+                        </option>
+
+                        <option value="syllabus">
+                            Semester Syllabus
+                        </option>
+
+                        <option value="assignment">
+                            Assignments / Labs
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label class="block text-slate-400 uppercase mb-1">
+                        Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="uploadTitle"
+                        placeholder="e.g. AIML Core Neural Notes"
+                        required
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div>
+
+                    <label class="block text-slate-400 uppercase mb-1">
+                        Branch / Semester
+                    </label>
+
+                    <input
+                        type="text"
+                        id="uploadBranch"
+                        placeholder="B.Tech AIML • SEM 01"
+                        required
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+                </div>
+
+
+                <div>
+
+                    <label
+                        id="fileOrLinkLable"
+                        class="block text-slate-400 uppercase mb-1">
+
+                        Select File
+
+                    </label>
+
+                    <input
+                        type="file"
+                        id="uploadFileInput"
+                        accept=".pdf,.doc,.docx,.zip,.txt,.png,.jpg"
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5">
+
+                    <input
+                        type="url"
+                        id="uploadLink"
+                        placeholder="https:// link..."
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 mt-2 hidden">
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-slate-400 uppercase mb-1">
+                    Module Abstract
+                </label>
+
+                <textarea
+                    id="uploadDesc"
+                    rows="2"
+                    placeholder="Summary of contents..."
+                    class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+                </textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="uploadBtn"
+                class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-3.5 rounded-xl">
+
+                DEPLOY TO CLOUD DATABASE
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- USERS -->
+
+    <div
+        class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 flex items-center justify-between">
+
+        <div>
+
+            <h3
+                class="text-base font-bold text-slate-100 font-mono">
+
+                USER DIRECTORY & ACCESS CONTROL
+
+            </h3>
+
+            <p class="text-xs text-slate-400">
+
+                View registered students and manage authentication.
+
+            </p>
+
+        </div>
+
+        <button
+            onclick="openModal('usersModal')"
+            class="bg-amber-600 text-white text-xs px-5 py-3 rounded-xl font-bold">
+
+            View All Users
+
+        </button>
+
+    </div>
+
+
+    <!-- MESSAGES -->
+
+    <div
+        class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6">
+
+        <h3
+            class="text-base font-bold text-slate-100 font-mono mb-4">
+
+            Student Inquiries & Admin Replies
+
+        </h3>
+
+        <div
+            id="adminMessagesContainer"
+            class="space-y-4 max-h-[450px] overflow-y-auto">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     STUDENT DASHBOARD
+===================================================== -->
+
+<div
+    id="studentDashboardBar"
+    class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full space-y-6">
+
+
+    <div
+        class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+
+        <div>
+
+            <span class="text-slate-400">
+                Authenticated Node:
+            </span>
+
+            <strong
+                id="loggedInUserDisplay"
+                class="text-cyan-400">
+            </strong>
+
+        </div>
+
+        <button
+            onclick="logoutSession()"
+            class="bg-red-500/10 text-red-400 border border-red-500/30 px-3.5 py-1.5 rounded-xl">
+
+            LOGOUT
+
+        </button>
+
+    </div>
+
+
+    <!-- REQUEST -->
+
+    <div
+        class="bg-slate-900 border border-cyan-500/30 rounded-2xl p-6">
+
+        <h3
+            class="text-sm font-bold text-slate-100 font-mono mb-4">
+
+            Request Notes or Features from Admin
+
+        </h3>
+
+        <form
+            onsubmit="handleSendStudentMessage(event)"
+            class="space-y-3">
+
+            <textarea
+                id="studentMsgText"
+                rows="3"
+                placeholder="Sir, please upload AIML mathematics notes..."
+                required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+            </textarea>
+
+            <button
+                type="submit"
+                id="sendMsgBtn"
+                class="bg-cyan-600 text-white font-bold px-5 py-2.5 rounded-xl">
+
+                Send Message to Admin
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- PERSONAL MESSAGES -->
+
+    <div
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+
+        <h3
+            class="text-sm font-bold text-slate-100 font-mono mb-4">
+
+            My Sent Messages & Admin Replies
+
+        </h3>
+
+        <div
+            id="studentPersonalMessagesContainer"
+            class="space-y-3 max-h-[350px] overflow-y-auto">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     USERS MODAL
+===================================================== -->
+
+<div
+    id="usersModal"
+    class="modal-backdrop fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+
+    <div
+        class="modal-box bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[85vh] flex flex-col">
+
+        <button
+            onclick="closeModal('usersModal')"
+            class="absolute top-4 right-4 text-slate-400 hover:text-white">
+
+            <i class="fa-solid fa-xmark text-lg"></i>
+
+        </button>
+
+        <h3
+            class="text-base font-bold text-slate-100 font-mono mb-4">
+
+            All Registered Users
+
+        </h3>
+
+
+        <input
+            type="text"
+            id="modalEmailSearch"
+            placeholder="Type email to search..."
+            class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 mb-4">
+
+
+        <div class="overflow-y-auto min-h-0 flex-1">
+
+            <table
+                class="w-full text-left font-mono text-xs">
+
+                <thead>
+
+                    <tr
+                        class="border-b border-slate-800 text-slate-400">
+
+                        <th class="py-3 px-3">
+                            Gmail
+                        </th>
+
+                        <th class="py-3 px-3">
+                            Status
+                        </th>
+
+                        <th class="py-3 px-3 text-right">
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="usersTableBody"
+                    class="divide-y divide-slate-800">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     LOGIN MODAL
+===================================================== -->
+
+<div
+    id="passwordModal"
+    class="modal-backdrop fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+
+    <div
+        class="modal-box bg-slate-900 border border-cyan-500/40 rounded-2xl max-w-sm w-full p-6 shadow-neon-cyan relative">
+
+        <button
+            onclick="closeModal('passwordModal')"
+            class="absolute top-4 right-4 text-slate-400">
+
+            <i class="fa-solid fa-xmark text-lg"></i>
+
+        </button>
+
+
+        <div class="text-center mb-6">
+
+            <div
+                class="bg-cyan-500/20 text-cyan-400 w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3">
+
+                <i class="fa-solid fa-user-lock"></i>
+
+            </div>
+
+            <h3
+                class="text-base font-bold text-slate-100 font-mono">
+
+                PORTAL LOGIN
+
+            </h3>
+
+            <p class="text-xs text-slate-400">
+                Enter your email & password.
+            </p>
+
+        </div>
+
+
+        <form
+            onsubmit="handleLogin(event)"
+            class="space-y-4">
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Your Email..."
+                required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+            <input
+                type="password"
+                id="loginPass"
+                placeholder="Password..."
+                required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+
+            <button
+                type="submit"
+                class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl">
+
+                Login / Register
+
+            </button>
+
+
+            <div class="text-center">
+
+                <button
+                    type="button"
+                    onclick="openForgotModal()"
+                    class="text-cyan-400 text-xs">
+
+                    Forgot Password?
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FORGOT PASSWORD
+===================================================== -->
+
+<div
+    id="forgotModal"
+    class="modal-backdrop fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+
+    <div
+        class="modal-box bg-slate-900 border border-amber-500/40 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+
+        <button
+            onclick="closeModal('forgotModal')"
+            class="absolute top-4 right-4 text-slate-400">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <div class="text-center mb-6">
+
+            <div
+                class="bg-amber-500/20 text-amber-400 w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3">
+
+                <i class="fa-solid fa-key"></i>
+
+            </div>
+
+            <h3
+                class="text-base font-bold text-slate-100 font-mono">
+
+                RESET PASSWORD
+
+            </h3>
+
+            <p class="text-xs text-slate-400">
+                Requires Special Password 
+            </p>
+
+        </div>
+
+
+        <form
+            onsubmit="handleResetPassword(event)"
+            class="space-y-4">
+
+            <input
+                type="email"
+                id="forgotEmail"
+                placeholder="Registered Email..."
+                required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+            <input
+                type="password"
+                id="specialPin"
+                placeholder="Special Password..."
+                required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+            <input
+                type="password"
+                id="newPass"
+                placeholder="New Password..."
+                required
+                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+
+
+            <button
+                type="submit"
+                class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl">
+
+                Reset Password
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    deleteDoc,
+    doc,
+    getDocs,
+    query,
+    where,
+    setDoc
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDrTn8aGV5EIa8s6MNRcmRweIEtfvFkBYk",
+
+    authDomain:
+        "engineering-portal-8ea04.firebaseapp.com",
+
+    projectId:
+        "engineering-portal-8ea04",
+
+    storageBucket:
+        "engineering-portal-8ea04.firebasestorage.app",
+
+    messagingSenderId:
+        "403752061495",
+
+    appId:
+        "1:403752061495:web:2876ebc1476ee2eb04cdb2",
+
+    measurementId:
+        "G-JQCKN7W9RF"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+/* =========================================
+   THEME SYSTEM
+========================================= */
+
+function updateThemeButton(theme) {
+
+    const icon =
+        document.getElementById("themeIcon");
+
+    const button =
+        document.getElementById("themeToggleBtn");
+
+
+    if (theme === "light") {
+
+        document.documentElement.classList
+            .remove("dark");
+
+        document.documentElement.classList
+            .add("light");
+
+
+        if (icon) {
+
+            icon.className =
+                "fa-solid fa-moon text-indigo-500";
+
+        }
+
+
+        if (button) {
+
+            button.title =
+                "Switch to Dark Mode";
+
+        }
+
+    } else {
+
+        document.documentElement.classList
+            .remove("light");
+
+        document.documentElement.classList
+            .add("dark");
+
+
+        if (icon) {
+
+            icon.className =
+                "fa-solid fa-sun text-yellow-400";
+
+        }
+
+
+        if (button) {
+
+            button.title =
+                "Switch to Light Mode";
+
+        }
+
+    }
+}
+
+
+window.toggleTheme = function () {
+
+    const current =
+        localStorage.getItem("btech_theme")
+        || "dark";
+
+
+    const newTheme =
+        current === "dark"
+            ? "light"
+            : "dark";
+
+
+    localStorage.setItem(
+        "btech_theme",
+        newTheme
+    );
+
+
+    updateThemeButton(newTheme);
+
+};
+
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let currentCategory = "all";
+
+let cachedUsersList = [];
+
+window.cloudItems = [];
+
+
+
+/* =========================================
+   DOM READY
+========================================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const theme =
+            localStorage.getItem("btech_theme")
+            || "dark";
+
+        updateThemeButton(theme);
+
+        checkLoginState();
+
+        initRealtimeSync();
+
+        initUsersSync();
+
+        initMessagesSync();
+        startTerminalTyping();
+        updateDeveloperStats();
+
+
+        document.getElementById(
+            "dbStatus"
+        ).innerText =
+            "ONLINE (REAL-TIME)";
+
+
+        document.getElementById(
+            "dbStatus"
+        ).className =
+            "text-cyan-400 font-bold";
+
+    }
+);
+
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+window.openModal = function(id) {
+
+    document
+        .getElementById(id)
+        .classList
+        .remove("hidden");
+
+};
+
+
+window.closeModal = function(id) {
+
+    document
+        .getElementById(id)
+        .classList
+        .add("hidden");
+
+};
+
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+window.clearSearch = function() {
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+    renderItems();
+
+};
+
+
+
+/* =========================================
+   LOGIN STATE
+========================================= */
+
+window.checkLoginState = function() {
+
+    const isLoggedIn =
+        localStorage.getItem(
+            "btech_logged_in"
+        ) === "true";
+
+
+    const loggedEmail =
+        (
+            localStorage.getItem(
+                "btech_user_email"
+            ) || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const panel =
+        document.getElementById(
+            "adminPanelSection"
+        );
+
+
+    const studentBar =
+        document.getElementById(
+            "studentDashboardBar"
+        );
+
+
+    const btnText =
+        document.getElementById(
+            "adminBtnText"
+        );
+
+
+    const btnIcon =
+        document.getElementById(
+            "adminBtnIcon"
+        );
+
+
+    const statusText =
+        document.getElementById(
+            "authStatusText"
+        );
+
+
+    if (isLoggedIn) {
+
+        btnText.innerText =
+            "GURU RAMDAYAL";
+
+        btnIcon.className =
+            "fa-solid fa-shield-halved text-cyan-400";
+
+
+        if (
+            loggedEmail ===
+            "ramdayalguru99@gmail.com"
+        ) {
+
+            panel.classList.remove("hidden");
+
+            studentBar.classList.add("hidden");
+
+
+            statusText.innerHTML =
+                'SYS_MODE: <strong class="text-cyan-400">MASTER ADMIN</strong>';
+
+        } else {
+
+            panel.classList.add("hidden");
+
+            studentBar.classList.remove("hidden");
+
+
+            document.getElementById(
+                "loggedInUserDisplay"
+            ).innerText = loggedEmail;
+
+
+            statusText.innerHTML =
+                `SYS_MODE: <strong class="text-blue-400">STUDENT (${loggedEmail})</strong>`;
+
+        }
+
+    } else {
+
+        panel.classList.add("hidden");
+
+        studentBar.classList.add("hidden");
+
+
+        btnText.innerText =
+            "AUTH ACCESS";
+
+
+        btnIcon.className =
+            "fa-solid fa-fingerprint";
+
+
+        statusText.innerHTML =
+            'SYS_MODE: <strong class="text-slate-400">STUDENT_LOCKED</strong>';
+
+    }
+
+};
+
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+window.toggleAdminSession = function() {
+
+    const logged =
+        localStorage.getItem(
+            "btech_logged_in"
+        ) === "true";
+
+
+    if (logged) {
+
+        const email =
+            (
+                localStorage.getItem(
+                    "btech_user_email"
+                ) || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        if (
+            email ===
+            "ramdayalguru99@gmail.com"
+        ) {
+
+            document
+                .getElementById(
+                    "adminPanelSection"
+                )
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        } else {
+
+            alert(
+                `Aap ${email} se authenticated hain.`
+            );
+
+        }
+
+    } else {
+
+        openModal("passwordModal");
+
+    }
+
+};
+
+
+
+/* =========================================
+   LOGIN / REGISTER
+========================================= */
+
+window.handleLogin = async function(e) {
+
+    e.preventDefault();
+
+
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const pass =
+        document
+            .getElementById("loginPass")
+            .value;
+
+
+    try {
+
+        const userDocRef =
+            doc(db, "users", email);
+
+
+        const usersRef =
+            collection(db, "users");
+
+
+        const q =
+            query(
+                usersRef,
+                where("email", "==", email)
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        if (snapshot.empty) {
+
+            await setDoc(
+                userDocRef,
+                {
+                    email: email,
+                    password: pass,
+                    isBlocked: false,
+                    createdAt:
+                        new Date().toISOString()
+                }
+            );
+
+
+            localStorage.setItem(
+                "btech_logged_in",
+                "true"
+            );
+
+
+            localStorage.setItem(
+                "btech_user_email",
+                email
+            );
+
+
+            closeModal("passwordModal");
+
+            checkLoginState();
+
+            renderItems();
+
+            alert(
+                "Account created successfully!"
+            );
+
+
+        } else {
+
+            let userData = null;
+
+
+            snapshot.forEach(
+                d => {
+                    userData = d.data();
+                }
+            );
+
+
+            if (userData.isBlocked) {
+
+                alert(
+                    "Access Denied: Account blocked."
+                );
+
+                return;
+            }
+
+
+            if (
+                userData.password === pass
+            ) {
+
+                localStorage.setItem(
+                    "btech_logged_in",
+                    "true"
+                );
+
+                localStorage.setItem(
+                    "btech_user_email",
+                    email
+                );
+
+
+                closeModal(
+                    "passwordModal"
+                );
+
+
+                checkLoginState();
+
+                renderItems();
+
+                alert(
+                    "Authentication successful!"
+                );
+
+
+            } else {
+
+                alert(
+                    "Invalid password!"
+                );
+
+            }
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert(
+            "Auth error: " +
+            err.message
+        );
+
+    }
+
+};
+
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+window.openForgotModal = function() {
+
+    closeModal("passwordModal");
+
+    openModal("forgotModal");
+
+};
+
+
+window.handleResetPassword = async function(e) {
+
+    e.preventDefault();
+
+
+    const email =
+        document
+            .getElementById("forgotEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const pin =
+        document
+            .getElementById("specialPin")
+            .value
+            .trim();
+
+
+    const newPass =
+        document
+            .getElementById("newPass")
+            .value;
+
+
+    if (pin !== "369") {
+
+        alert(
+            "Incorrect Special Password!"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        await setDoc(
+            doc(db, "users", email),
+            {
+                password: newPass
+            },
+            {
+                merge: true
+            }
+        );
+
+
+        localStorage.setItem(
+            "btech_logged_in",
+            "true"
+        );
+
+
+        localStorage.setItem(
+            "btech_user_email",
+            email
+        );
+
+
+        closeModal("forgotModal");
+
+        checkLoginState();
+
+        renderItems();
+
+
+        alert(
+            "Password reset successful!"
+        );
+
+
+    } catch (err) {
+
+        alert(
+            "Reset error: " +
+            err.message
+        );
+
+    }
+
+};
+
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+window.logoutSession = function() {
+
+    localStorage.removeItem(
+        "btech_logged_in"
+    );
+
+    localStorage.removeItem(
+        "btech_user_email"
+    );
+
+
+    checkLoginState();
+
+    renderItems();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    alert(
+        "Session terminated successfully."
+    );
+
+};
+
+
+
+/* =========================================
+   FIRESTORE MODULE SYNC
+========================================= */
+
+function initRealtimeSync() {
+
+    onSnapshot(
+        collection(db, "modules"),
+        snapshot => {
+
+            window.cloudItems = [];
+
+
+            snapshot.forEach(
+                d => {
+
+                    window.cloudItems.push({
+                        id: d.id,
+                        ...d.data()
+                    });
+
+                }
+            );
+
+
+            renderItems();
+            updateDeveloperStats();
+
+        },
+        err => {
+
+            console.error(err);
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   USERS SYNC
+========================================= */
+
+function initUsersSync() {
+
+    onSnapshot(
+        collection(db, "users"),
+        snapshot => {
+
+            cachedUsersList = [];
+
+
+            snapshot.forEach(
+                d => {
+
+                    const u = d.data();
+
+
+                    cachedUsersList.push({
+
+                        email:
+                            u.email ||
+                            d.id,
+
+                        isBlocked:
+                            u.isBlocked === true
+
+                    });
+
+                }
+            );
+
+
+            renderUsersTable();
+            updateDeveloperStats();
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+window.filterCategory = function(category) {
+
+    currentCategory = category;
+
+
+    [
+        "all",
+        "notes",
+        "tool",
+        "pyq",
+        "syllabus",
+        "assignment"
+    ].forEach(cat => {
+
+        const btn =
+            document.getElementById(
+                "btn-" + cat
+            );
+
+
+        if (cat === category) {
+
+            btn.className =
+                "cat-btn bg-cyan-600 text-white px-3.5 py-2 rounded-xl text-xs font-mono uppercase font-bold";
+
+        } else {
+
+            btn.className =
+                "cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-3.5 py-2 rounded-xl text-xs font-mono uppercase";
+
+        }
+
+    });
+
+
+    renderItems();
+
+};
+
+
+
+/* =========================================
+   RENDER ITEMS
+========================================= */
+
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+/* =========================================
+   DEVELOPER STATS
+========================================= */
+
+function updateDeveloperStats() {
+    const items = window.cloudItems || [];
+
+    const count = type => items.filter(x => x.type === type).length;
+
+    const set = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = String(value).padStart(2, "0");
+    };
+
+    set("statNotes", count("notes"));
+    set("statTools", count("tool"));
+    set("statPapers", count("pyq"));
+
+    const userCount = cachedUsersList.length;
+    set("statUsers", userCount);
+}
+
+
+/* =========================================
+   TERMINAL TYPING EFFECT
+========================================= */
+
+function startTerminalTyping() {
+    const el = document.getElementById("terminalTyping");
+    if (!el) return;
+
+    const lines = [
+        "loading semester modules...",
+        "syncing cloud repository...",
+        "checking developer tools...",
+        "neural workspace ready."
+    ];
+
+    let line = 0;
+    let char = 0;
+    let deleting = false;
+
+    function tick() {
+        if (!el) return;
+
+        const current = lines[line];
+
+        if (!deleting) {
+            el.textContent = current.slice(0, char++);
+            if (char > current.length) {
+                deleting = true;
+                setTimeout(tick, 1100);
+                return;
+            }
+        } else {
+            el.textContent = current.slice(0, char--);
+            if (char < 0) {
+                deleting = false;
+                line = (line + 1) % lines.length;
+                char = 0;
+            }
+        }
+
+        setTimeout(tick, deleting ? 28 : 48);
+    }
+
+    tick();
+}
+
+
+window.renderItems = function() {
+
+    const grid =
+        document.getElementById(
+            "contentGrid"
+        );
+
+
+    const items =
+        window.cloudItems || [];
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const logged =
+        localStorage.getItem(
+            "btech_logged_in"
+        ) === "true";
+
+
+    const email =
+        (
+            localStorage.getItem(
+                "btech_user_email"
+            ) || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    grid.innerHTML = "";
+
+
+    if (!logged) {
+
+        grid.innerHTML = `
+
+            <div class="col-span-full text-center py-16 bg-slate-900/40 border border-cyan-500/30 rounded-2xl p-6">
+
+                <div class="bg-cyan-500/10 text-cyan-400 w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
+
+                    <i class="fa-solid fa-lock text-xl"></i>
+
+                </div>
+
+                <h3 class="text-base font-bold text-slate-200 mb-2">
+
+                    RESTRICTED NEURAL CONTENT
+
+                </h3>
+
+                <p class="text-slate-400 text-xs mb-6">
+
+                    Authenticate to access B.Tech AIML notes, tools & repositories.
+
+                </p>
+
+                <button
+                    onclick="openModal('passwordModal')"
+                    class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-bold px-6 py-3 rounded-xl">
+
+                    AUTH ACCESS NOW
+
+                </button>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    let filtered =
+        items.filter(item => {
+
+            if (
+                currentCategory !== "all" &&
+                item.type !== currentCategory
+            ) {
+                return false;
+            }
+
+
+            if (search) {
+
+                const text =
+                    (
+                        item.title +
+                        " " +
+                        item.branch +
+                        " " +
+                        (item.desc || "")
+                    )
+                    .toLowerCase();
+
+
+                return text.includes(search);
+
+            }
+
+
+            return true;
+
+        });
+
+
+    if (filtered.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="col-span-full text-center py-10 font-mono text-slate-500">
+
+                No matching modules located.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered.forEach(item => {
+
+        let badge =
+            "bg-blue-500/10 text-blue-400 border-blue-500/20";
+
+
+        if (item.type === "tool") {
+
+            badge =
+                "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+
+        }
+
+
+        if (item.type === "pyq") {
+
+            badge =
+                "bg-purple-500/10 text-purple-400 border-purple-500/20";
+
+        }
+
+
+        if (item.type === "syllabus") {
+
+            badge =
+                "bg-amber-500/10 text-amber-400 border-amber-500/20";
+
+        }
+
+
+        const admin =
+            email ===
+            "ramdayalguru99@gmail.com";
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "item-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-cyan-500/50 transition group shadow-lg hover:shadow-neon";
+
+
+        card.innerHTML = `
+
+            <div>
+
+                <div class="flex items-center justify-between mb-4">
+
+                    <span
+                        class="${badge} border text-[10px] font-mono px-2.5 py-1 rounded uppercase font-bold">
+
+                        ${escapeHTML(item.branch || "B.Tech AIML")}
+
+                    </span>
+
+                    <span class="text-slate-500 text-xs font-mono uppercase">
+
+                        ${escapeHTML(item.type)}
+
+                    </span>
+
+                </div>
+
+
+                <h3
+                    class="text-base font-bold text-slate-100 group-hover:text-cyan-300 mb-2">
+
+                    ${escapeHTML(item.title)}
+
+                </h3>
+
+
+                <p
+                    class="text-xs text-slate-400 mb-6 leading-relaxed">
+
+                    ${escapeHTML(item.desc || "No description provided.")}
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="flex items-center justify-between pt-4 border-t border-slate-800/60">
+
+                <div
+                    class="flex items-center space-x-1.5 text-[11px] font-mono text-cyan-400">
+
+                    <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+
+                    <span>
+                        Cloud Live
+                    </span>
+
+                </div>
+
+
+                <div class="flex gap-2">
+
+                    ${
+                        admin
+                        ?
+                        `<button
+                            onclick="deleteCloudItem('${item.id}')"
+                            class="text-red-400 hover:text-red-300 px-2">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>`
+                        :
+                        ""
+                    }
+
+
+                    <a
+                        href="${item.link || "#"}"
+                        target="_blank"
+                        class="bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white text-xs font-mono px-4 py-2 rounded-xl transition border border-slate-700">
+
+                        ${item.type === "tool"
+                            ? "LAUNCH TOOL"
+                            : "DOWNLOAD / VIEW"}
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+};
+
+
+
+/* =========================================
+   SEARCH EVENT
+========================================= */
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        renderItems
+    );
+
+
+
+/* =========================================
+   UPLOAD TYPE
+========================================= */
+
+document
+    .getElementById("uploadType")
+    .addEventListener(
+        "change",
+        e => {
+
+            const type =
+                e.target.value;
+
+
+            const file =
+                document.getElementById(
+                    "uploadFileInput"
+                );
+
+
+            const link =
+                document.getElementById(
+                    "uploadLink"
+                );
+
+
+            if (type === "tool") {
+
+                file.classList.add("hidden");
+
+                link.classList.remove(
+                    "hidden"
+                );
+
+            } else {
+
+                file.classList.remove(
+                    "hidden"
+                );
+
+                link.classList.add(
+                    "hidden"
+                );
+
+            }
+
+        }
+    );
+
+
+
+/* =========================================
+   UPLOAD
+========================================= */
+
+document
+    .getElementById("uploadForm")
+    .addEventListener(
+        "submit",
+        async e => {
+
+            e.preventDefault();
+
+
+            const email =
+                (
+                    localStorage.getItem(
+                        "btech_user_email"
+                    ) || ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            if (
+                email !==
+                "ramdayalguru99@gmail.com"
+            ) {
+
+                alert(
+                    "Only Master Admin can upload modules."
+                );
+
+                return;
+
+            }
+
+
+            const type =
+                document.getElementById(
+                    "uploadType"
+                ).value;
+
+
+            const title =
+                document.getElementById(
+                    "uploadTitle"
+                ).value;
+
+
+            const branch =
+                document.getElementById(
+                    "uploadBranch"
+                ).value;
+
+
+            const desc =
+                document.getElementById(
+                    "uploadDesc"
+                ).value;
+
+
+            const fileInput =
+                document.getElementById(
+                    "uploadFileInput"
+                );
+
+
+            const linkInput =
+                document.getElementById(
+                    "uploadLink"
+                );
+
+
+            let finalLink = "";
+
+
+            try {
+
+                if (type === "tool") {
+
+                    finalLink =
+                        linkInput.value;
+
+                } else {
+
+                    const file =
+                        fileInput.files[0];
+
+
+                    if (file) {
+
+                        finalLink =
+                            await new Promise(
+                                (resolve, reject) => {
+
+                                    const reader =
+                                        new FileReader();
+
+
+                                    reader.onload =
+                                        () =>
+                                            resolve(
+                                                reader.result
+                                            );
+
+
+                                    reader.onerror =
+                                        reject;
+
+
+                                    reader.readAsDataURL(
+                                        file
+                                    );
+
+                                }
+                            );
+
+                    }
+
+                }
+
+
+                await addDoc(
+                    collection(
+                        db,
+                        "modules"
+                    ),
+                    {
+
+                        type,
+                        title,
+                        branch,
+                        desc,
+                        link: finalLink,
+
+                        createdAt:
+                            new Date()
+                                .toISOString()
+
+                    }
+                );
+
+
+                document
+                    .getElementById(
+                        "uploadForm"
+                    )
+                    .reset();
+
+
+                alert(
+                    "Module successfully deployed!"
+                );
+
+
+            } catch (err) {
+
+                console.error(err);
+
+                alert(
+                    "Upload error: " +
+                    err.message
+                );
+
+            }
+
+        }
+    );
+
+
+
+/* =========================================
+   DELETE MODULE
+========================================= */
+
+window.deleteCloudItem = async function(id) {
+
+    if (
+        !confirm(
+            "Permanently delete this module?"
+        )
+    ) return;
+
+
+    try {
+
+        await deleteDoc(
+            doc(
+                db,
+                "modules",
+                id
+            )
+        );
+
+
+        alert(
+            "Module deleted successfully."
+        );
+
+
+    } catch (err) {
+
+        alert(
+            "Delete error: " +
+            err.message
+        );
+
+    }
+
+};
+
+
+
+/* =========================================
+   STUDENT MESSAGE
+========================================= */
+
+window.handleSendStudentMessage =
+    async function(e) {
+
+        e.preventDefault();
+
+
+        const email =
+            (
+                localStorage.getItem(
+                    "btech_user_email"
+                ) || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const text =
+            document.getElementById(
+                "studentMsgText"
+            ).value.trim();
+
+
+        if (!email) {
+
+            alert(
+                "Please login first."
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            await addDoc(
+                collection(
+                    db,
+                    "messages"
+                ),
+                {
+
+                    senderEmail: email,
+
+                    message: text,
+
+                    reply: "",
+
+                    createdAt:
+                        new Date()
+                            .toISOString()
+
+                }
+            );
+
+
+            document.getElementById(
+                "studentMsgText"
+            ).value = "";
+
+
+            alert(
+                "Message sent to Guru Ramdayal!"
+            );
+
+
+        } catch (err) {
+
+            alert(
+                "Message error: " +
+                err.message
+            );
+
+        }
+
+    };
+
+
+
+/* =========================================
+   MESSAGES SYNC
+========================================= */
+
+function initMessagesSync() {
+
+    onSnapshot(
+        collection(
+            db,
+            "messages"
+        ),
+        snapshot => {
+
+            const admin =
+                document.getElementById(
+                    "adminMessagesContainer"
+                );
+
+
+            const student =
+                document.getElementById(
+                    "studentPersonalMessagesContainer"
+                );
+
+
+            const email =
+                (
+                    localStorage.getItem(
+                        "btech_user_email"
+                    ) || ""
+                )
+                .trim()
+                .toLowerCase();
+
+
+            let messages = [];
+
+
+            snapshot.forEach(
+                d => {
+
+                    messages.push({
+                        id: d.id,
+                        ...d.data()
+                    });
+
+                }
+            );
+
+
+            messages.sort(
+                (a,b) =>
+                    new Date(b.createdAt) -
+                    new Date(a.createdAt)
+            );
+
+
+            if (admin) {
+
+                admin.innerHTML = "";
+
+
+                messages.forEach(m => {
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    div.className =
+                        "bg-slate-950/70 border border-slate-800 rounded-xl p-4 space-y-3";
+
+
+                    div.innerHTML = `
+
+                        <div class="text-xs">
+
+                            <strong class="text-cyan-400">
+
+                                ${m.senderEmail}
+
+                            </strong>
+
+                        </div>
+
+                        <p class="text-slate-200 text-sm">
+
+                            ${m.message}
+
+                        </p>
+
+                        <textarea
+                            id="replyInput_${m.id}"
+                            rows="2"
+                            placeholder="Type reply..."
+                            class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2">
+
+                            ${m.reply || ""}
+
+                        </textarea>
+
+
+                        <div class="flex gap-2">
+
+                            <button
+                                onclick="sendAdminReply('${m.id}')"
+                                class="bg-emerald-600 text-white px-3 py-1.5 rounded">
+
+                                Reply
+
+                            </button>
+
+
+                            <button
+                                onclick="deleteAdminMessage('${m.id}')"
+                                class="text-red-400 px-3">
+
+                                Delete
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    admin.appendChild(div);
+
+                });
+
+            }
+
+
+            if (
+                student &&
+                email &&
+                email !==
+                "ramdayalguru99@gmail.com"
+            ) {
+
+                student.innerHTML = "";
+
+
+                messages
+                    .filter(
+                        m =>
+                            (
+                                m.senderEmail || ""
+                            )
+                            .toLowerCase()
+                            === email
+                    )
+                    .forEach(m => {
+
+                        const div =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        div.className =
+                            "bg-slate-950/70 border border-slate-800 rounded-xl p-4";
+
+
+                        div.innerHTML = `
+
+                            <p class="text-slate-300 text-sm">
+
+                                ${m.message}
+
+                            </p>
+
+                            <div
+                                class="mt-3 bg-emerald-950/30 border border-emerald-500/30 rounded-lg p-3">
+
+                                <strong class="text-emerald-400">
+
+                                    Guru Ramdayal Reply:
+
+                                </strong>
+
+                                <p class="text-slate-200 text-sm mt-1">
+
+                                    ${m.reply || "Awaiting admin response..."}
+
+                                </p>
+
+                            </div>
+
+                        `;
+
+
+                        student.appendChild(div);
+
+                    });
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   ADMIN REPLY
+========================================= */
+
+window.sendAdminReply =
+    async function(id) {
+
+        const reply =
+            document
+                .getElementById(
+                    `replyInput_${id}`
+                )
+                .value
+                .trim();
+
+
+        try {
+
+            await setDoc(
+                doc(
+                    db,
+                    "messages",
+                    id
+                ),
+                {
+                    reply
+                },
+                {
+                    merge: true
+                }
+            );
+
+
+            alert(
+                "Reply sent successfully!"
+            );
+
+
+        } catch (err) {
+
+            alert(
+                "Reply error: " +
+                err.message
+            );
+
+        }
+
+    };
+
+
+
+/* =========================================
+   DELETE MESSAGE
+========================================= */
+
+window.deleteAdminMessage =
+    async function(id) {
+
+        if (
+            !confirm(
+                "Delete this message?"
+            )
+        ) return;
+
+
+        await deleteDoc(
+            doc(
+                db,
+                "messages",
+                id
+            )
+        );
+
+    };
+
+
+
+/* =========================================
+   USERS TABLE
+========================================= */
+
+window.renderUsersTable = function() {
+
+    const body =
+        document.getElementById(
+            "usersTableBody"
+        );
+
+
+    if (!body) return;
+
+
+    const search =
+        (
+            document.getElementById(
+                "modalEmailSearch"
+            ).value || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    body.innerHTML = "";
+
+
+    cachedUsersList
+        .filter(
+            u =>
+                u.email
+                    .toLowerCase()
+                    .includes(search)
+        )
+        .forEach(u => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.className =
+                "hover:bg-slate-800/40";
+
+
+            row.innerHTML = `
+
+                <td class="py-3 px-3">
+
+                    ${u.email}
+
+                </td>
+
+
+                <td class="py-3 px-3">
+
+                    ${
+                        u.isBlocked
+                        ?
+                        '<span class="text-red-400">Blocked</span>'
+                        :
+                        '<span class="text-cyan-400">Active</span>'
+                    }
+
+                </td>
+
+
+                <td class="py-3 px-3 text-right">
+
+                    <button
+                        onclick="toggleBlockUser('${u.email}', ${!u.isBlocked})"
+                        class="text-xs border border-slate-700 px-3 py-1 rounded">
+
+                        ${u.isBlocked
+                            ? "Unblock"
+                            : "Block"}
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            body.appendChild(row);
+
+        });
+
+};
+
+
+
+document
+    .getElementById(
+        "modalEmailSearch"
+    )
+    .addEventListener(
+        "input",
+        renderUsersTable
+    );
+
+
+
+/* =========================================
+   BLOCK USER
+========================================= */
+
+window.toggleBlockUser =
+    async function(
+        email,
+        status
+    ) {
+
+        try {
+
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    email
+                ),
+                {
+                    isBlocked: status
+                },
+                {
+                    merge: true
+                }
+            );
+
+
+            alert(
+                "User status updated."
+            );
+
+
+        } catch (err) {
+
+            alert(
+                "Error: " +
+                err.message
+            );
+
+        }
+
+    };
+
+</script>
+
+</body>
+</html>
